@@ -4,8 +4,9 @@
 ## For more details on configuring external_url see:
 ## https://gitlab.com/gitlab-org/omnibus-gitlab/blob/629def0a7a26e7c2326566f0758d4a27857b52a3/README.md#configuring-the-external-url-for-gitlab
 # external_url 'GENERATED_EXTERNAL_URL' # default: http://hostname
+external_url 'http://' + ENV['GITLAB_HOST'] + ENV['DEV_SUFFIX'] if ENV['GITLAB_HOST']
 
-ENV.select {|e| e =~ /^GITLAB_/ }.each do |key, value|
+ENV.select { |e| e =~ /^GITLAB_/ }.each do |key, value|
   gitlab_rails[key.gsub(/^GITLAB_/, '').downcase] = value
 end
 
